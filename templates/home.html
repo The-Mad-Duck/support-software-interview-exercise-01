@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search database</title>
+</head>
+<body data-gr-c-s-loaded="true" style="margin: 0px;">
+
+
+<form name="home" method="POST">
+    <h3>Search</h3>
+
+    Submitted After<br>
+    <input name="submitted_after" type="text" id="a"><br>
+
+    Submitted Before<br>
+    <input name="submitted_before" type="text" id="b"><br>
+
+    Minimum Nodes<br>
+    <input name="min_nodes" type="number" id="c"><br>
+
+    Max Nodes<br>
+    <input name="max_nodes" type="number" id="d"><br>
+
+    <button type="button" onclick="submitButton()">Submit</button>
+
+    <script>
+        function concatfil(a, b){
+            if(a !== "")
+                var a = a + "&" + b;
+            else
+                var a = b;
+            return a;
+        }
+
+        function submitButton(){
+            console.log("Button Clicked");
+            result = "";
+            var a = document.getElementById("a").value;
+            var b = document.getElementById("b").value;
+            var c = document.getElementById("c").value;
+            var d = document.getElementById("d").value;
+            if (a !== "")
+                result = concatfil(result, "filter[submitted_after]='" + a + "'");
+            if (b !== "")
+                result = concatfil(result, "filter[submitted_before]='" + b + "'");
+            if (c !== "")
+                result = concatfil(result, "filter[min_nodes]=" + c);
+            if (d !== "")
+                result = concatfil(result, "filter[max_nodes]=" + d);
+           console.log(result)
+           if (result !== "")
+                window.location.href = "/batch_jobs?" + result
+            else
+                window.location.href = "/batch_jobs"
+        }
+    </script>
+</form>
+
+</body>
+</html>
